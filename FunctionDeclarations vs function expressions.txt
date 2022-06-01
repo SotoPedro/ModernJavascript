@@ -1,0 +1,15 @@
+-Function delcarations
+fuction doSomething() {
+    console.log("Declare Something");
+}
+
+-Function expressions
+var something  = function() {
+    console.log('Express Something');
+}
+
+Javascript utiliza dos forma de funciones, function delcarations (function statements) y function expressions, la diferencia es que las function delcarations pueden ser invocadas
+ incluso antes de ser definidas y las function expressions no.
+histed: levantada.
+
+llamar las funciones en lugar de hacerlas ánonimas nos permite debugear de manera más precisa y efectiva. Sin embargo hay buscadores que no permiten ejecutar de esta forma.

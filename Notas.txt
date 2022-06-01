@@ -1,0 +1,120 @@
+JavaScript is Ubiquitous - Meaning it is everywhere
+javascripting.com Muestra todos los temas actuales o frameworks actuales.
+
+------*Conceptos avanzados Para funciones y objetos
+
+En javascript las funciones son objetos. Todo excepto los datos primitivos son objetos en javascript
+Datos primitivos:
+strings, numbers, booleans, undefined, null, Symbols(ES6).
+
+Algunos datos tiene un wrapper que los permite comportarse como objetos, sin embargo el tipo de dato por si mismo no es un objeto como tal
+Objeto: colección de valores (nombre y propiedades)
+
+las propiedades tienen dos propiedades internas siendo estás [[code]] y [[call]] una ejecutal el código y la otra le permite ser llamada, es lo que las diferencias de un 
+objeto en javascript.
+
+Javascript utiliza dos forma de funciones, function delcarations (function statements) y function expressions, la diferencia es que las function delcarations pueden ser invocadas
+ incluso antes de ser definidas y las function expressions no.
+
+-----Funciones son objetos------
+Metodo no amigable para construir funciones es el uso del contructor de function.
+Las funciones son pasadas por referencias, al igual que los objetos, por lo que una variable apunta hacía la dirección en la que
+se almacenó ese objeto, no el objeto como tal
+
+la función dir() nos permite ver los detalles de lo que le pasemos.
+Por lo que si hacemos un dir en report1 y report3 se imprime lo mismo, ya que es una referencia y no una copia.
+
+-----First class functions-----
+First class functions quiere decir que las funciones son tratadas como valores que puede ser asignados a otras variables
+Se puede utilizar como entrada a funciones y como salida de funciones.
+
+ej. Ser asignada a variables
+let sum = function(x,y) {
+    return x + y;
+}
+
+ej. Se utilizan como entrada a otra función:
+let customer = [
+    {id: 1, name: 'Mark', status: 'active'},
+    {id: 2, name: 'Steven', status: 'cancelled'},
+    {id: 3, name: 'Jacke', status: 'active'},
+]
+let actives = customer.filter(function(custom) {
+    return custom.status === 'active';
+})
+las funciones pueden utilizarse como entradas a otras funciones
+
+eje. Pueden utilizarse como salida, es decir retornar otras funciones
+function crearCalificador(adjetivo) { //la función regresa otra función
+    return function(sustantivo) { //Se retorna como valor de la función calificador
+        return `${adjetivo} ${sustantivo}`
+    }
+}
+
+let calificaComoSuper = crearCalificador('super'); //le estamos pasando la palarab super a la función crear calificador, retornando una función nueva como resultado, es decir
+la función calificaComoSuper es el retorno de crearCalificador.
+
+let amigo = calificaComoSuper('amigo'); // como vimos, esta es la función interna que se nos regresó y esta nos devuelve el string
+
+
+
+-----Invoking function-----
+Llamar a las funciones es a lo que se refiera y existen 4 formas de llamarlas
+
+-como una función - como funciones normales
+-como un método -cuando pertenecen a un objeto
+-como un constructor(new) - cuando son un constructor se requiere de new
+-indirectamente utilizando call() y apply()
+
+
+in addition: además de.
+
+Todas las funciones además del parametro que se le manda, reciben otros dos parametos siendo "this" y "arguments"
+let test = fuction(val) {
+    console.log(val);
+}
+
+Es importante tomar en cuenta la forma en la que va a llamar una función, esto debido a que según como sea llamada, dependerá a que hace
+referencia la palabra "this".
+
+------Creating Javascript objects------
+Existen dos métodos para crear objectos en javascript
+
+-Object Literal
+let obj = {
+    firsName: 'Steven',
+    latName: 'Grantt'
+}
+
+-Object constructor
+let obj = new Object();
+obj.firstName = 'Mark';
+obj.lastName = 'spector';
+
+
+"in" nos sirve para comprobar si una propiedad existe en un objeto
+ej:
+"firsName" in obj; debería devolver true si existe esa propiedad en el objeto;
+también nos permite evaluar lo mismo.
+obj.hasOwnProperty("firstName");
+
+
+
+----Understanding this-------
+This es definido en tiempo de ejecución y dependiendo de lo que suceda en el código esto puede ser cada vez algo diferente
+
+-'this' is...
+*Establecido en tiempo de ejecución cuando una función es invocada
+*Determinado por cómo una función es invocada, no en dónde la función es definida
+*una referencia al objeto
+
+-'this' is not...
+*La función. Aunque se establece cuando se invoca la función, no es la función.
+
+The binding of a value to this (this binding) can be implicit (set by the JavaScript engine) or explicit (Set by you)
+
+
+-------Examing this when a normal fuction is invoked-----------
+Cuando creamos una función normal, y la llamamos, this hará referencia al objeto global donde es llamada la función, sin importar en dónde la declaremos y llamemmos
+------Examing this when a method is invoked------------
+Cuando se invoca el método, this hace referencia al objeto que llamó el método no porque se definió dentro de él, sino porque lo invocó este.
